@@ -29,6 +29,8 @@ head(unemp_raw)
 
 ```
 
+The data are seasonally adjusted unemployment rates for the U.S.. There are four states: Oregon (ORUR), California (CAUR), Texas (TXUR), and New York (NYUR). I pulled them technically from FRED in the tidyquant library and then saved it as a rds file. The data starts in Jan 1976 and ends in Sept 2026 which yields 3041 observations. There are three columns with the rate, date, and where it is coming from. There is an observation per month minus times when the Government shut down.
+
 ## Wrangling
 
 ```{r}
@@ -42,7 +44,7 @@ kable(unemp_summary, digits=2,
 #| echo: false
 
 kable(unemp_recent_summary, digits=2,
-      caption = "Summary statistics for monthly unemployment rates by region, January 2020 onward")
+      caption = "Summary statistics for monthly unemployment rates by region, January 2015 onward")
 ```
 
 ```{r}
@@ -105,4 +107,4 @@ I chose to graph each state's unemployment rate *relative* to the national avera
 
 ## Reflection
 
-This process was relatively smooth for me. Github is a fantastic version control system that I have been using for a long time so I felt comfortable with it. One thing that was really nice was the Github Copilot auto-complete feature which spared me from hours of ggplot2 syntax but still let me be in the weeds enough to get a feel of the data. I experimented with using the source() function in quarto to retrieve objects from the R script as well as some rendering options which I think, aesthetically, worked out wonderfully. I will definitely be using source() function lots more especially in problem sets to save time and keep organized.
+This process was relatively smooth for me. Github is a fantastic version control system that I have been using for a long time so I felt comfortable with it. One thing that was really nice was the Github Copilot auto-complete feature which spared me from hours of ggplot2 syntax but still let me be in the weeds enough to get a feel of the data. I experimented with using the source() function in quarto to retrieve objects from the R script as well as some rendering options which I think, aesthetically, worked out wonderfully. At first I got some rendering errors using the source() function but after clicking the source on save check-box in the R script everything sailed smoothly.

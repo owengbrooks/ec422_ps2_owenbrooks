@@ -53,9 +53,10 @@ unemp_summary <- unemp |>
     min_rate = min(unemployment_rate, na.rm = TRUE),
     max_rate = max(unemployment_rate, na.rm = TRUE)
   )
-
+unemp_recent <- unemp |>
+  filter(date >= as.Date("2015-01-01"))
 unemp_recent_summary <- unemp |>
-  filter(date >= as.Date("2020-01-01")) |>
+  filter(date >= as.Date("2015-01-01")) |>
   group_by(region) |>
   summarize(
     mean_rate = mean(unemployment_rate, na.rm = TRUE),
@@ -63,29 +64,19 @@ unemp_recent_summary <- unemp |>
     max_rate = max(unemployment_rate, na.rm = TRUE)
   )
 unemp_top_increases <- unemp |>
-  group_by(region) |>
-  slice_max(unemployment_rate_change, n = 5) |>
-  ungroup() |>
-  arrange(region, desc(unemployment_rate_change))
+  slice_max(unemployment_rate_change, n = 5)
 
 unemp_top_decreases <- unemp |>
-  group_by(region) |>
-  slice_min(unemployment_rate_change, n = 5) |>
-  ungroup() |>
-  arrange(region, unemployment_rate_change)
+  slice_min(unemployment_rate_change, n = 5)
 
 unemp_top_increases_no_covid <- unemp |>
-  filter(date < as.Date("2020-03-01")) |>
-  group_by(region) |>
-  slice_max(unemployment_rate_change, n = 5) |>
-  ungroup() |>
-  arrange(region, desc(unemployment_rate_change))
+  filter(year(date) != 2020) |>
+  slice_max(unemployment_rate_change, n = 5)
+
 unemp_top_decreases_no_covid <- unemp |>
-  filter(date < as.Date("2020-03-01")) |>
-  group_by(region) |>
-  slice_min(unemployment_rate_change, n = 5) |>
-  ungroup() |>
-  arrange(region, unemployment_rate_change)
+  filter(year(date) != 2020) |>
+  slice_min(unemployment_rate_change, n = 5)
+
 unemp_line_plot <- unemp |>
   ggplot(aes(x = date, y = unemployment_rate, color = region)) +
   geom_line() +
@@ -112,7 +103,7 @@ unemp_line_plot_indv <- unemp |>
 unemp_line_plot_indv
 
 unemp_bar_chart <- unemp_summary |>
-  ggplot(aes(x = region, y = mean_rate, fill = region)) +
+  ggplot(aes(x = fct_reorder(region, mean_rate), y = mean_rate, fill = region)) +
   geom_bar(stat = "identity") +
   labs(
     title = "Mean Unemployment Rate by Region",
@@ -141,3 +132,4 @@ unemp_gap_plot <- unemp |>
   theme_minimal()
 
 unemp_gap_plot
+
