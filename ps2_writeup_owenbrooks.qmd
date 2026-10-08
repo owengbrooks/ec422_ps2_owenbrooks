@@ -10,10 +10,55 @@ format:
 
 **GitHub repo:** <https://github.com/owengbrooks/ec422_ps2_owenbrooks/tree/main>
 
+```{r}
+#| include: false
+
+library(tidyverse)
+library(knitr)
+library(ggplot2)
+source("ps2_script_owenbrooks.R")
+
+```
+
 ## Data
+
+```{r}
+#| echo: false
+
+head(unemp_raw) 
+
+```
 
 ## Wrangling
 
-## Visualization
+```{r}
+#| echo: false
+
+kable(unemp_summary, digits=2,
+      caption = "Unemployment rates by region, 2020 to present")
+```
+
+```{r}
+#| echo: false
+
+kable(unemp_recent_summary, digits=2,
+      caption = "Unemployment rates by region, 2020 to present")
+```
+
+```{r}
+#| echo: false
+
+kable(unemp_top_increases_no_covid, digits=2,
+      caption = "Unemployment rates by region, 2020 to present")
+```
+
+```{r}
+#| echo: false
+
+kable(unemp_top_decreases_no_covid, digits=2,
+      caption = "Unemployment rates by region, 2020 to present")
+```
+
+## Visualization 
 
 ## Reflection

@@ -54,7 +54,14 @@ unemp_summary <- unemp |>
     max_rate = max(unemployment_rate, na.rm = TRUE)
   )
 
-
+unemp_recent_summary <- unemp |>
+  filter(date >= as.Date("2020-01-01")) |>
+  group_by(region) |>
+  summarize(
+    mean_rate = mean(unemployment_rate, na.rm = TRUE),
+    min_rate = min(unemployment_rate, na.rm = TRUE),
+    max_rate = max(unemployment_rate, na.rm = TRUE)
+  )
 unemp_top_increases <- unemp |>
   group_by(region) |>
   slice_max(unemployment_rate_change, n = 5) |>
@@ -73,7 +80,12 @@ unemp_top_increases_no_covid <- unemp |>
   slice_max(unemployment_rate_change, n = 5) |>
   ungroup() |>
   arrange(region, desc(unemployment_rate_change))
-
+unemp_top_decreases_no_covid <- unemp |>
+  filter(date < as.Date("2020-03-01")) |>
+  group_by(region) |>
+  slice_min(unemployment_rate_change, n = 5) |>
+  ungroup() |>
+  arrange(region, unemployment_rate_change)
 unemp_line_plot <- unemp |>
   ggplot(aes(x = date, y = unemployment_rate, color = region)) +
   geom_line() +
