@@ -128,7 +128,7 @@ us <- unemp |>
   filter(region == "US") |>
   select(date, us_rate = unemployment_rate)
 
-unemp |>
+unemp_gap_plot <- unemp |>
   filter(region != "US") |>
   left_join(us, by = "date") |>
   mutate(gap = unemployment_rate - us_rate) |>
@@ -139,3 +139,5 @@ unemp |>
        subtitle = "Above zero = worse than the national rate",
        x = "Date", y = "Gap from US rate (percentage points)", color = "Region") +
   theme_minimal()
+
+unemp_gap_plot

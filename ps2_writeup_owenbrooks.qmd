@@ -35,30 +35,74 @@ head(unemp_raw)
 #| echo: false
 
 kable(unemp_summary, digits=2,
-      caption = "Unemployment rates by region, 2020 to present")
+      caption = "Summary statistics for monthly unemployment rates by region, 1976–2026")
 ```
 
 ```{r}
 #| echo: false
 
 kable(unemp_recent_summary, digits=2,
-      caption = "Unemployment rates by region, 2020 to present")
+      caption = "Summary statistics for monthly unemployment rates by region, January 2020 onward")
 ```
 
 ```{r}
 #| echo: false
 
 kable(unemp_top_increases_no_covid, digits=2,
-      caption = "Unemployment rates by region, 2020 to present")
+      caption = "Largest month-over-month increases in unemployment, excluding COVID-19")
 ```
 
 ```{r}
 #| echo: false
 
 kable(unemp_top_decreases_no_covid, digits=2,
-      caption = "Unemployment rates by region, 2020 to present")
+      caption = "Largest month-over-month decreases in unemployment, excluding COVID-19")
 ```
 
-## Visualization 
+## Visualization
+
+```{r}
+#| echo: false
+#| fig-cap: "Monthly unemployment rate by region, 1976–2026"
+#| fig-width: 8
+#| fig-height: 5
+
+unemp_line_plot
+
+```
+
+```{r}
+#| echo: false
+#| fig-cap: "Monthly unemployment rate, shown separately for each region"
+#| fig-width: 8
+#| fig-height: 5
+
+unemp_line_plot_indv
+
+```
+
+```{r}
+#| echo: false
+#| fig-cap: "Mean monthly unemployment rate by region, 1976–2026"
+#| fig-width: 8
+#| fig-height: 5
+
+unemp_bar_chart
+
+```
+
+```{r}
+#| echo: false
+#| fig-cap: "Difference between each state's unemployment rate and the US rate, in percentage points. Positive values mean the state's rate was higher than the national rate"
+#| fig-width: 8
+#| fig-height: 5
+
+unemp_gap_plot
+
+```
+
+I chose to graph each state's unemployment rate *relative* to the national average. Doing this we can isolate the *composition* of the national unemployment rate and tell stories about what was happening. For example, in the 1980s Texas unemployment rate was around 2pp lower than the national average. After some research, this was due to the high oil prices post-1979 Iranian Revolution which drove employment growth in Texas during a time when Volcker brought up rates significantly and unemployment was high. Then when oil prices shot down in 86', unemployment in Texas shot up.
 
 ## Reflection
+
+This process was relatively smooth for me. Github is a fantastic version control system that I have been using for a long time so I felt comfortable with it. One thing that was really nice was the Github Copilot auto-complete feature which spared me from hours of ggplot2 syntax but still let me be in the weeds enough to get a feel of the data. I experimented with using the source() function in quarto to retrieve objects from the R script as well as some rendering options which I think, aesthetically, worked out wonderfully. I will definitely be using source() function lots more especially in problem sets to save time and keep organized.
