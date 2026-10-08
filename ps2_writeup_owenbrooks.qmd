@@ -1,0 +1,19 @@
+---
+title: "Problem Set 2"
+author: "Owen Brooks"
+date: today
+format:
+  html:
+    toc: true
+    embed-resources: true
+---
+
+**GitHub repo:** <https://github.com/owengbrooks/ec422_ps2_owenbrooks/tree/main>
+
+## Data
+
+## Wrangling
+
+## Visualization
+
+## Reflection
