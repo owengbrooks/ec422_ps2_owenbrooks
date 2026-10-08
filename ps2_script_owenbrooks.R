@@ -90,6 +90,7 @@ unemp_line_plot_indv <- unemp |>
   ggplot(aes(x = date, y = unemployment_rate)) +
   geom_line() +
   facet_wrap(~region) +
+  scale_x_date(date_breaks = "20 years", date_labels = "%Y") +
   labs(
     title = "Unemployment Rate Over Time by Region",
     x = "Date",
@@ -98,4 +99,31 @@ unemp_line_plot_indv <- unemp |>
   theme_minimal()
 unemp_line_plot_indv
 
+unemp_bar_chart <- unemp_summary |>
+  ggplot(aes(x = region, y = mean_rate, fill = region)) +
+  geom_bar(stat = "identity") +
+  labs(
+    title = "Mean Unemployment Rate by Region",
+    x = "Region",
+    y = "Mean Unemployment Rate (%)"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "none")
+unemp_bar_chart
 
+
+us <- unemp |>
+  filter(region == "US") |>
+  select(date, us_rate = unemployment_rate)
+
+unemp |>
+  filter(region != "US") |>
+  left_join(us, by = "date") |>
+  mutate(gap = unemployment_rate - us_rate) |>
+  ggplot(aes(x = date, y = gap, color = region)) +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  geom_line() +
+  labs(title = "State unemployment relative to the US",
+       subtitle = "Above zero = worse than the national rate",
+       x = "Date", y = "Gap from US rate (percentage points)", color = "Region") +
+  theme_minimal()
