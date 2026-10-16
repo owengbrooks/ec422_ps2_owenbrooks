@@ -11,7 +11,6 @@ format:
 **GitHub repo:** <https://github.com/owengbrooks/ec422_ps2_owenbrooks/tree/main>
 
 ```{r}
-#| include: false
 
 library(tidyverse)
 library(knitr)
@@ -23,7 +22,6 @@ source("ps2_script_owenbrooks.R")
 ## Data
 
 ```{r}
-#| echo: false
 
 head(unemp_raw) 
 
@@ -34,8 +32,6 @@ The data are seasonally adjusted unemployment rates for the U.S.. There are four
 ## Wrangling
 
 ```{r}
-#| echo: false
-
 kable(unemp_summary, digits=2,
       caption = "Summary statistics for monthly unemployment rates by region, 1976–2026")
 ```
@@ -48,15 +44,11 @@ kable(unemp_recent_summary, digits=2,
 ```
 
 ```{r}
-#| echo: false
-
 kable(unemp_top_increases_no_covid, digits=2,
       caption = "Largest month-over-month increases in unemployment, excluding COVID-19")
 ```
 
 ```{r}
-#| echo: false
-
 kable(unemp_top_decreases_no_covid, digits=2,
       caption = "Largest month-over-month decreases in unemployment, excluding COVID-19")
 ```
@@ -64,7 +56,6 @@ kable(unemp_top_decreases_no_covid, digits=2,
 ## Visualization
 
 ```{r}
-#| echo: false
 #| fig-cap: "Monthly unemployment rate by region, 1976–2026"
 #| fig-width: 8
 #| fig-height: 5
@@ -74,7 +65,6 @@ unemp_line_plot
 ```
 
 ```{r}
-#| echo: false
 #| fig-cap: "Monthly unemployment rate, shown separately for each region"
 #| fig-width: 8
 #| fig-height: 5
@@ -84,7 +74,6 @@ unemp_line_plot_indv
 ```
 
 ```{r}
-#| echo: false
 #| fig-cap: "Mean monthly unemployment rate by region, 1976–2026"
 #| fig-width: 8
 #| fig-height: 5
@@ -94,7 +83,6 @@ unemp_bar_chart
 ```
 
 ```{r}
-#| echo: false
 #| fig-cap: "Difference between each state's unemployment rate and the US rate, in percentage points. Positive values mean the state's rate was higher than the national rate"
 #| fig-width: 8
 #| fig-height: 5
